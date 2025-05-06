@@ -2,7 +2,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- Mobile theme color -->
+    <meta name="theme-color" content="#ffffff">
+    <!-- Apple mobile web app capable -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <!-- Mobile status bar style -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>SNCGDVP | Premium Fashion Brand</title>
     <style>
         /* Reset and base styles */
@@ -13,10 +19,52 @@
             font-family: 'Arial', sans-serif;
         }
         
+        /* Mobile-specific styles */
+        body.is-mobile {
+            font-size: 16px; /* Ensure readable text on mobile */
+        }
+        
+        /* Improve touch targets for mobile */
+        body.is-mobile .btn,
+        body.is-mobile .nav-links a,
+        body.is-mobile .footer-column a {
+            padding: 0.8rem;
+            margin: 0.3rem 0;
+            display: inline-block;
+        }
+        
         body {
-            background-color: #f8f8f8;
+            background-color: #f9f7f4;
             color: #333;
             line-height: 1.6;
+            font-family: 'Open Sans', 'Arial', sans-serif;
+        }
+        
+        /* Warm color scheme */
+        :root {
+            --primary-color: #e67e22;
+            --secondary-color: #34495e;
+            --accent-color: #d35400;
+            --text-color: #2c3e50;
+            --light-bg: #f9f7f4;
+            --dark-bg: #2c3e50;
+        }
+        
+        /* Typography */
+        h1, h2, h3, h4, h5 {
+            font-family: 'Playfair Display', 'Georgia', serif;
+            font-weight: 500;
+        }
+        
+        p {
+            color: var(--text-color);
+            font-size: 1.05rem;
+        }
+        
+        .handwritten {
+            font-family: 'Caveat', 'cursive';
+            font-size: 1.4em;
+            color: var(--accent-color);
         }
         
         /* Header */
@@ -95,22 +143,31 @@
             max-width: 600px;
         }
         
+        /* Update Buttons */
         .btn {
             display: inline-block;
-            background-color: #000;
+            background-color: var(--primary-color);
             color: #fff;
             padding: 0.8rem 2rem;
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s ease;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(230, 126, 34, 0.3);
         }
         
         .btn:hover {
-            background-color: #333;
+            background-color: var(--accent-color);
             transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(211, 84, 0, 0.4);
+        }
+        
+        .btn i {
+            margin-right: 8px;
         }
         
         /* Collections */
+        /* Updated Collection Styles */
         .collections {
             padding: 5rem 5%;
             max-width: 1400px;
@@ -119,36 +176,93 @@
         
         .section-title {
             text-align: center;
-            font-size: 2rem;
-            margin-bottom: 3rem;
-            font-weight: 300;
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
             letter-spacing: 2px;
+            color: var(--secondary-color);
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 3rem;
+            color: #777;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .collection-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 2rem;
         }
         
         .collection-item {
             background-color: #fff;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
             overflow: hidden;
-            border-radius: 4px;
-            transition: transform 0.3s ease;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
         }
         
         .collection-item:hover {
-            transform: translateY(-10px);
+            transform: translateY(-8px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
         
         .collection-image {
             height: 350px;
-            background-color: #e0e0e0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .collection-image img {
+            transition: transform 0.5s ease;
+        }
+        
+        .collection-item:hover .collection-image img {
+            transform: scale(1.05);
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0,0,0,0.3);
             display: flex;
             align-items: center;
             justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .collection-item:hover .overlay {
+            opacity: 1;
+        }
+        
+        .overlay-content {
+            text-align: center;
+        }
+        
+        .view-btn {
+            background-color: #fff;
+            color: var(--secondary-color);
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            display: inline-block;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .view-btn:hover {
+            background-color: var(--primary-color);
+            color: #fff;
         }
         
         .collection-info {
@@ -157,17 +271,43 @@
         
         .collection-info h3 {
             margin-bottom: 0.5rem;
-            font-weight: 500;
+            font-weight: 600;
+            color: var(--secondary-color);
         }
         
         .collection-info p {
             color: #666;
             margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+        
+        .product-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 0.8rem;
+            border-top: 1px solid #eee;
         }
         
         .price {
-            font-weight: 600;
+            font-weight: 700;
             font-size: 1.1rem;
+            color: var(--accent-color);
+        }
+        
+        .rating {
+            color: #f1c40f;
+            font-size: 0.9rem;
+        }
+        
+        .rating .reviews {
+            color: #777;
+            margin-left: 5px;
+        }
+        
+        .collection-footer {
+            text-align: center;
+            margin-top: 3rem;
         }
         
         /* About */
@@ -354,68 +494,347 @@
 <body>
     <header>
         <nav class="navbar">
-            <a href="#" class="logo">SNCGDVP</a>
+            <a href="#" class="logo">SNCGDVP <span class="handwritten">Style</span></a>
             <ul class="nav-links">
-                <li><a href="#">Home</a></li>
-                <li><a href="#collections">Collections</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
+                <li><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="#collections"><i class="fas fa-tshirt"></i> Collections</a></li>
+                <li><a href="#about"><i class="fas fa-heart"></i> Our Story</a></li>
+                <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
             </ul>
         </nav>
     </header>
     
+    <!-- Mobile Detection Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            function checkMobile() {
+                const isMobile = window.matchMedia("(max-width: 768px)").matches;
+                document.body.classList.toggle('is-mobile', isMobile);
+                
+                if (isMobile) {
+                    console.log("Mobile device detected - applying mobile optimizations");
+                }
+            }
+            
+            // Check on page load
+            checkMobile();
+            
+            // Check on resize
+            window.addEventListener('resize', checkMobile);
+        });
+    </script>
+    
     <section class="hero">
         <div class="hero-content">
-            <h1>PREMIUM FASHION</h1>
-            <p>Discover our latest collection of high-quality, sustainable fashion that combines elegance with modern style.</p>
-            <a href="#collections" class="btn">SHOP NOW</a>
+            <span class="handwritten">Discover Your Style</span>
+            <h1>CRAFTED WITH PASSION</h1>
+            <p>Unique fashion pieces designed with care. Every stitch tells a story - be part of ours.</p>
+            <a href="#collections" class="btn"><i class="fas fa-shopping-bag"></i> EXPLORE COLLECTIONS</a>
         </div>
     </section>
     
     <section id="collections" class="collections">
-        <h2 class="section-title">FEATURED COLLECTIONS</h2>
+        <h2 class="section-title">OUR <span class="handwritten">Beautiful</span> COLLECTIONS</h2>
+        <p class="section-subtitle">Each piece is carefully crafted for you with love and attention to detail</p>
+        
         <div class="collection-grid">
             <div class="collection-item">
                 <div class="collection-image">
-                    <img src="/api/placeholder/300/350" alt="Summer Collection">
+                    <img src="/api/placeholder/300/350" alt="Summer Linen Dress">
+                    <div class="overlay">
+                        <div class="overlay-content">
+                            <a href="#" class="view-btn"><i class="fas fa-eye"></i> Quick View</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="collection-info">
-                    <h3>Summer Essentials</h3>
-                    <p>Light fabric designs for the warm season</p>
-                    <span class="price">$99.00</span>
+                    <h3>Summer Linen Dress</h3>
+                    <p>Breathable fabric perfect for warm days</p>
+                    <div class="product-meta">
+                        <span class="price">$89.00</span>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span class="reviews">(42)</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             
             <div class="collection-item">
                 <div class="collection-image">
-                    <img src="/api/placeholder/300/350" alt="Formal Collection">
+                    <img src="/api/placeholder/300/350" alt="Classic Blazer">
+                    <div class="overlay">
+                        <div class="overlay-content">
+                            <a href="#" class="view-btn"><i class="fas fa-eye"></i> Quick View</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="collection-info">
-                    <h3>Formal Elegance</h3>
-                    <p>Sophisticated designs for special occasions</p>
-                    <span class="price">$149.00</span>
+                    <h3>Classic Tailored Blazer</h3>
+                    <p>Elegant design for professional settings</p>
+                    <div class="product-meta">
+                        <span class="price">$149.00</span>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span class="reviews">(36)</span>
+                        </div>
+                    </div>
                 </div>
             </div>
             
             <div class="collection-item">
                 <div class="collection-image">
-                    <img src="/api/placeholder/300/350" alt="Casual Collection">
+                    <img src="/api/placeholder/300/350" alt="Casual Jeans">
+                    <div class="overlay">
+                        <div class="overlay-content">
+                            <a href="#" class="view-btn"><i class="fas fa-eye"></i> Quick View</a>
+                        </div>
+                    </div>
                 </div>
                 <div class="collection-info">
-                    <h3>Casual Comfort</h3>
-                    <p>Everyday style with premium quality</p>
-                    <span class="price">$79.00</span>
+                    <h3>Vintage Wash Denim</h3>
+                    <p>Comfortable fit with a vintage look</p>
+                    <div class="product-meta">
+                        <span class="price">$79.00</span>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span class="reviews">(58)</span>
+                        </div>
+                    </div>
                 </div>
             </div>
+            
+            <div class="collection-item">
+                <div class="collection-image">
+                    <img src="/api/placeholder/300/350" alt="Silk Blouse">
+                    <div class="overlay">
+                        <div class="overlay-content">
+                            <a href="#" class="view-btn"><i class="fas fa-eye"></i> Quick View</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="collection-info">
+                    <h3>Elegant Silk Blouse</h3>
+                    <p>Luxurious silk with delicate detailing</p>
+                    <div class="product-meta">
+                        <span class="price">$110.00</span>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span class="reviews">(27)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="collection-item">
+                <div class="collection-image">
+                    <img src="/api/placeholder/300/350" alt="Knit Sweater">
+                    <div class="overlay">
+                        <div class="overlay-content">
+                            <a href="#" class="view-btn"><i class="fas fa-eye"></i> Quick View</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="collection-info">
+                    <h3>Cozy Knit Sweater</h3>
+                    <p>Handcrafted wool blend for warmth</p>
+                    <div class="product-meta">
+                        <span class="price">$95.00</span>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span class="reviews">(31)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="collection-item">
+                <div class="collection-image">
+                    <img src="/api/placeholder/300/350" alt="Leather Jacket">
+                    <div class="overlay">
+                        <div class="overlay-content">
+                            <a href="#" class="view-btn"><i class="fas fa-eye"></i> Quick View</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="collection-info">
+                    <h3>Urban Leather Jacket</h3>
+                    <p>Premium leather with modern styling</p>
+                    <div class="product-meta">
+                        <span class="price">$225.00</span>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span class="reviews">(45)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="collection-item">
+                <div class="collection-image">
+                    <img src="/api/placeholder/300/350" alt="Pleated Skirt">
+                    <div class="overlay">
+                        <div class="overlay-content">
+                            <a href="#" class="view-btn"><i class="fas fa-eye"></i> Quick View</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="collection-info">
+                    <h3>Pleated Midi Skirt</h3>
+                    <p>Flowing design with elegant movement</p>
+                    <div class="product-meta">
+                        <span class="price">$85.00</span>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span class="reviews">(29)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="collection-item">
+                <div class="collection-image">
+                    <img src="/api/placeholder/300/350" alt="Cotton Shirt">
+                    <div class="overlay">
+                        <div class="overlay-content">
+                            <a href="#" class="view-btn"><i class="fas fa-eye"></i> Quick View</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="collection-info">
+                    <h3>Essential Cotton Shirt</h3>
+                    <p>Versatile piece for any wardrobe</p>
+                    <div class="product-meta">
+                        <span class="price">$65.00</span>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span class="reviews">(63)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="collection-item">
+                <div class="collection-image">
+                    <img src="/api/placeholder/300/350" alt="Summer Hat">
+                    <div class="overlay">
+                        <div class="overlay-content">
+                            <a href="#" class="view-btn"><i class="fas fa-eye"></i> Quick View</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="collection-info">
+                    <h3>Wide Brim Summer Hat</h3>
+                    <p>Stylish protection for sunny days</p>
+                    <div class="product-meta">
+                        <span class="price">$45.00</span>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span class="reviews">(38)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="collection-item">
+                <div class="collection-image">
+                    <img src="/api/placeholder/300/350" alt="Designer Scarf">
+                    <div class="overlay">
+                        <div class="overlay-content">
+                            <a href="#" class="view-btn"><i class="fas fa-eye"></i> Quick View</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="collection-info">
+                    <h3>Printed Silk Scarf</h3>
+                    <p>Hand-printed design on premium silk</p>
+                    <div class="product-meta">
+                        <span class="price">$55.00</span>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span class="reviews">(22)</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="collection-footer">
+            <a href="#" class="btn"><i class="fas fa-th-large"></i> View All Products</a>
         </div>
     </section>
     
     <section id="about" class="about">
         <div class="about-content">
-            <h2 class="section-title">ABOUT SNCGDVP</h2>
-            <p>SNCGDVP was established with a passion for creating high-quality fashion that stands the test of time. Our commitment to sustainable practices and ethical manufacturing ensures that each piece not only looks exceptional but is also produced with care for our planet.</p>
-            <p>With meticulous attention to detail and a dedication to craftsmanship, every SNCGDVP garment represents the perfect blend of contemporary design and timeless elegance.</p>
-            <a href="#contact" class="btn">LEARN MORE</a>
+            <span class="handwritten">Our Story</span>
+            <h2 class="section-title">THE FACES BEHIND SNCGDVP</h2>
+            
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="/api/placeholder/400/500" alt="Our Workshop">
+                </div>
+                <div class="about-text">
+                    <p>SNCGDVP began as a small dream in a tiny workshop. Our founders, Elena and Marco, shared a passion for creating clothing that tells stories and makes people feel special.</p>
+                    
+                    <p>What makes us different is our dedication to <strong>human craftsmanship</strong>. Each piece is touched by skilled hands that care about quality, sustainability, and your experience wearing our creations.</p>
+                    
+                    <p>We believe fashion should be personal. Our team of artisans puts their heart into every stitch, creating pieces that aren't just worn, but truly <em>felt</em>.</p>
+                    
+                    <blockquote>
+                        "Fashion isn't just about looking good – it's about feeling connected to what you wear and the hands that made it."
+                        <cite>— Elena, Co-founder</cite>
+                    </blockquote>
+                    
+                    <p>When you choose SNCGDVP, you're not just buying clothing. You're becoming part of our story, and we're becoming part of yours.</p>
+                    
+                    <div class="signature">
+                        <span class="handwritten">With love,</span>
+                        <img src="/api/placeholder/150/60" alt="Signature">
+                    </div>
+                    
+                    <a href="#contact" class="btn"><i class="fas fa-envelope"></i> GET IN TOUCH</a>
+                </div>
+            </div>
         </div>
     </section>
     
